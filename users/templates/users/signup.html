@@ -61,12 +61,12 @@
 <body>
     <div class="container">
         <h2>Create an Account</h2>
-        <form action ="/signup" method="post">
+        <form action ="{% url 'signup' %}"  method="post">
         {% csrf_token %}
             <input type="text" name="name" placeholder="Name" required>
             <input type="email" name="email" placeholder="Email" required>
-            <input type="password" name="password" placeholder="Create Password" required>
-            <input type="password" name="confirm-password" placeholder="Confirm Password" required>
+            <input type="password" name="pass1" placeholder="Create Password" required>
+            <input type="password" name="pass2" placeholder="Confirm Password" required>
             <button type="submit">Sign Up</button>
         </form>
         <div class="link">
