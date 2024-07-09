@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.contrib.auth import authenticate,login 
+from django.contrib.auth import authenticate,login as auth_login
 
 
 def store(request):
@@ -16,11 +16,17 @@ def signup(request) :
         pass2 = request.POST.get('pass2')
         
         if pass1 == pass2:
-            my_user = User.objects.create_user(username=name, email=email, password=pass1)
-            my_user.save()
+            if User.objects.filter(username=name).exists() :
+                messages.error(request,"Username already exists")
+            elif User.objects.filter(email=email).exists():
+                messages.error(request,"Email already exists")
 
-            messages.success(request, "Your account has been successfully created")
-            return redirect('login')
+            else :
+                user = User.objects.create_user(username=name,email=email)
+                user.set_password(pass1)
+                user.save()
+                messages.success(request, "Your account has been successfully created")
+                return redirect('login')
         else:
             messages.error(request, "Passwords do not match")
     
@@ -30,18 +36,19 @@ def signup(request) :
 
 def login(request) :
     if request.method =='POST' :
-        name = request.POST('name')
-        pass1 = request.POST('pass1')
+        name = request.POST.get('name')
+        pass1 = request.POST.get('pass1')
 
         #inbuild 
-        user = authenticate(name=name,password=pass1)
+        user = authenticate(request,username=name,password=pass1)
 
         if user is not None :
-            login(request, user )
+            auth_login(request, user )
+            return redirect('store')
         
         else :
             messages.error(request,"Bad Credintial...!!!")
-            return redirect('store')
+            return redirect('login')
     
 
 

@@ -123,3 +123,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'icart/static'),
 ]
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/store/'
+LOGOUT_REDIRECT_URL = '/login/'

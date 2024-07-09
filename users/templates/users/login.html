@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% comment %} <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> {% endcomment %}
     <title>Login Page</title>
     <style>
         body {
@@ -44,16 +44,38 @@
         .container button:hover {
             background-color: #45a049;
         }
+        .container button:hover {
+            background-color: #45a049;
+        }
+        .container .link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .container .link a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        .container .link a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h2>Login</h2>
-        <form onsubmit="event.preventDefault(); window.location.href='home.html';">
-            <input type="email" name="email" placeholder="Email" required>
-            <input type="password" name="password" placeholder="Password" required>
+
+         <form action="{% url 'store' %}" method="post"> 
+            {% csrf_token %}  
+            <input type="text" name="name" placeholder="Username" required>  
+            <input type="password" name="pass1" placeholder="Password" required>
             <button type="submit">Login</button>
         </form>
+        <div class="link">
+            <p><a href="{%url 'password_reset'%}">Forgot your password</a></p>
+            <p>Don't have an account ? <a href="{%url 'signup'%}">Sign up</a></p>
+            <p>Go to Store :<a href="{%url 'store'%}">Store</a></p>
+        </div>
     </div>
 </body>
 </html>
