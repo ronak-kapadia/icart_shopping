@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'store',
-    'users'
+    'users',
+    'home'
 ]
 
 MIDDLEWARE = [
@@ -123,6 +124,16 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'icart/static'),
 ]
-LOGIN_URL = '/login/'
-LOGIN_REDIRECT_URL = '/store/'
-LOGOUT_REDIRECT_URL = '/login/'
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'store'
+LOGOUT_REDIRECT_URL = 'login'
+
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER ='ronakkapadia227@gmail.com'
+EMAIL_HOST_PASSWORD ='tnjt qdpa afsk alce'
+
+
