@@ -15,16 +15,16 @@ def signup(request):
 
         if pass1 == pass2:
             if User.objects.filter(username=name).exists():
-                print('user')
+              
                 return render(request, 'users/signup.html', {'error_message': 'Username already exists'})
             elif User.objects.filter(email=email).exists():
-                print('user1')
+              
                 return render(request, 'users/signup.html', {'error_message': 'Email already exists'})
             else:
                 user = User.objects.create_user(username=name, email=email)
                 user.set_password(pass1)
                 user.save()
-                print("User created successfully, redirecting to login page")
+               
                 return redirect('login')
         else:
             return render(request, 'users/signup.html', {'error_message': 'Passwords do not match'})
@@ -51,11 +51,11 @@ def login(request):
             user = authenticate(request, username=user.username, password=pass1)
             if user is not None:
                 auth_login(request, user)
-                print('11')
+
                 return redirect('store')
-        print('12')
+
         return render(request, 'users/login.html', {'error_message': 'Bad Credentials'})
-    print(14)
+   
     return render(request, "users/login.html")
 
 def logout(request):

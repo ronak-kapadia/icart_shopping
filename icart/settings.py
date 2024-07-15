@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'store',
     'users',
-    'home'
 ]
 
 MIDDLEWARE = [
@@ -119,11 +118,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATIC_URL = '/static/'
-
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'icart/static'),
 ]
+MEDIA_URL = '/image/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/image')
+
+
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'store'
 LOGOUT_REDIRECT_URL = 'login'
@@ -137,3 +140,5 @@ EMAIL_HOST_USER ='ronakkapadia227@gmail.com'
 EMAIL_HOST_PASSWORD ='tnjt qdpa afsk alce'
 
 
+
+ 
