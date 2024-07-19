@@ -1,3 +1,4 @@
+{%load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,6 +57,18 @@
         .container .link a:hover {
             text-decoration: underline;
         }
+        .password-input{
+            position : relative ;
+        }
+        .password-input img{
+            width : 20px ;
+            cursor : pointer ;
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+        }
+        
     </style>
 </head>
 <body>
@@ -65,8 +78,16 @@
         {% csrf_token %}
             <input type="text" name="name" placeholder="Name" required>
             <input type="email" name="email" placeholder="Email" required>
-            <input type="password" name="pass1" placeholder="Create Password" required>
-            <input type="password" name="pass2" placeholder="Confirm Password" required>
+
+            <div class ="password-input">
+                <input type="password" id = "password1" name="pass1" placeholder="Create Password" required>
+                <img src ="{%static 'image/eye-close.png'%}" id ="eyeicon1" >
+            </div>
+
+            <div class="password-input">
+                <input type="password" id= "password2" name="pass2" placeholder="Confirm Password" required>
+                <img src ="{% static 'image/eye-close.png'%}" id ="eyeicon2">
+            </div>
             <button type="submit">Sign Up</button>
         </form>
         <div class="link">
@@ -74,5 +95,34 @@
             <p>Go to Stores: <a href="{% url 'store' %}">Store</a></p>
         </div>
     </div>
+    <script>
+        let eyeicon1 = document.getElementById("eyeicon1") ;
+        let password1 = document.getElementById("password1");
+        let eyeicon2 = document.getElementById("eyeicon2") ;
+        let password2 = document.getElementById("password2");
+
+
+
+
+        eyeicon1.onclick=function(){
+            if (password1.type =="password"){
+                password1.type = "text" ;
+                eyeicon1.src ="{% static 'image/eye-open.png'%}";
+            }else{
+                password1.type = "password" ;
+                eyeicon1.src ="{% static 'image/eye-close.png'%}";
+            }
+        };
+        eyeicon2.onclick=function(){
+            if (password2.type =="password"){
+                password2.type = "text" ;
+                eyeicon2.src ="{% static 'image/eye-open.png'%}";
+            }else{
+                password2.type = "password" ;
+                eyeicon2.src ="{% static 'image/eye-close.png'%}";
+            }
+        };
+        
+    </script>
 </body>
 </html>

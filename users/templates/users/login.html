@@ -1,3 +1,4 @@
+{% load static%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,6 +55,17 @@
         .container .link a:hover {
             text-decoration: underline;
         }
+        .password-input{
+            position : relative ;
+        }
+        .password-input img{
+            width : 20px ;
+            cursor : pointer ;
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+        }
     </style>
 </head>
 <body>
@@ -62,7 +74,10 @@
         <form action="{% url 'login' %}" method="post">
             {% csrf_token %}
             <input type="email" name="email" placeholder="Email" required>
-            <input type="password" name="pass1" placeholder="Password" required>
+            <div class="password-input">
+                <input type="password" id="password" name="pass1" placeholder="Password" required>
+                <img src="{%static 'image/eye-close.png'%}" id="eyeicon">
+            </div>
             <button type="submit">Login</button>
         </form>
         <div class="link">
@@ -71,5 +86,22 @@
             <p>Go to Store: <a href="{% url 'store' %}">Store</a></p>
         </div>
     </div>
+
+    <script>
+        let eyeicon = document.getElementById("eyeicon");
+        let password = document.getElementById("password");
+
+        eyeicon.onclick=function(){
+            if (password.type =="password"){
+                password.type = "text";
+                eyeicon.src ="{% static 'image/eye-open.png'%}";
+            }else {
+                password.type ="password";
+                eyeicon.src ="{%static 'image/eye-close.png'%}";
+            }
+        };
+
+
+    </script>
 </body>
 </html>
